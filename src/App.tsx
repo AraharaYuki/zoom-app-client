@@ -5,11 +5,11 @@ ZoomMtg.preLoadWasm();
 ZoomMtg.prepareWebSDK();
 
 function App() {
-  const authEndpoint = ""; // http://localhost:4000
-  const sdkKey = "";
-  const meetingNumber = "";
-  const passWord = "";
-  const role = 0;
+  const authEndpoint = "http://localhost:4000"; // http://localhost:4000
+  const sdkKey = "Nn2I_8mgTDWkEtA7dVlLg";
+  const meetingNumber = "83162166212";
+  const passWord = "rcn4B7";
+  const role = 1;
   const userName = "React";
   const userEmail = "";
   const registrantToken = "";
@@ -70,8 +70,8 @@ function App() {
   return (
     <div className="App">
       <main>
-        <h1>Zoom Meeting SDK Sample React</h1>
-        <button onClick={getSignature}>Join Meeting</button>
+        <h1>Hi!SHINGIへようこそ</h1>
+        <button onClick={getSignature}>SHINGIを始める</button>
       </main>
     </div>
   );
