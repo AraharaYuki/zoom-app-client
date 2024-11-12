@@ -27,7 +27,7 @@ main button:hover {
 .mytext {
   color: white;
   left: 100%;
-  font-size: 32px;
+  font-size: 40px;
   font-weight: bold;
   margin:0;
   display:inline-block; 
@@ -38,6 +38,8 @@ main button:hover {
   animation-iteration-count:1;
   position:absolute;
   display: inline-block;
+  z-index: 10;
+  -webkit-text-stroke: 1px #000;
 }
 
 @keyframes danmaku {

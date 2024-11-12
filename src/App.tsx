@@ -97,6 +97,11 @@ const createText = (text) => {
     new_element.className = 'mytext'
     new_element.style.cssText = `top: ${randomNum(0, height)}px;`
     textbox_element.appendChild(new_element);
+
+    setTimeout(() => {
+      textbox_element.removeChild(new_element);
+    }, 6500);
+
   } else {
     console.error("テキストボックス要素が見つかりません");
   }
