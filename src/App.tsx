@@ -54,7 +54,14 @@ function App() {
           tk: registrantToken,
           zak: zakToken,
           success: (success: unknown) => {
-            console.log(success);
+            const footer = document.getElementById('foot-bar');
+            const fireBtn = document.createElement('button');
+            fireBtn.textContent = '弾幕モード';
+            fireBtn.onclick = () => {
+              showChatPanel();
+              fire();
+            }
+            footer?.appendChild(fireBtn);
           },
           error: (error: unknown) => {
             console.log(error);
@@ -75,6 +82,77 @@ function App() {
       </main>
     </div>
   );
+}
+
+const createText = (text) => {
+  console.log("Display text : ", text);
+  const randomNum = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
+  var id = "video-share-layout"
+  var textbox_element = document.getElementsByClassName(id)[0];
+
+  if (textbox_element) {
+    const height = textbox_element.style.height.replace("px", "")
+    var new_element = document.createElement('p')
+    new_element.textContent = text
+    new_element.className = 'mytext'
+    new_element.style.cssText = `top: ${randomNum(0, height)}px;`
+    textbox_element.appendChild(new_element);
+  } else {
+    console.error("テキストボックス要素が見つかりません");
+  }
+}
+
+const showChatPanel = () => {
+    const chatBtn = document.querySelector('[aria-label="open the chat panel"]') as HTMLElement;
+    if (chatBtn) {
+      chatBtn.click();
+    } else {
+      console.error("チャットボタンが見つかりませんでした");
+    }
+  // document.getElementById("wc-container-left").style.cssText = "width: 100%;"
+}
+
+let processedMessageIds = new Set();
+
+function fire() {
+  console.log("fire func executed!")
+
+  setInterval(() => {
+    let chatContainer = document.getElementsByClassName('ReactVirtualized__Grid__innerScrollContainer')[0];
+    if (!chatContainer) {
+      console.error("チャットコンテナが見つかりません");
+      return;
+    }
+
+    let chatMessages = chatContainer.children;
+    for(let i = chatMessages.length -1 ; i >= 0 ; i-- ) {
+      const messageElement = chatMessages[i];
+      const messageId = messageElement.id || `message-${i}`;
+      const textElement = chatMessages[i].lastElementChild;
+
+      if (processedMessageIds.has(messageId)) {
+        continue;
+      }
+      
+      if (textElement && textElement.textContent) {
+        const text = textElement.textContent.trim();
+        // const timestamp = new Date().getTime();
+        // const messageId = `${text}-${i}-${timestamp}`;
+ 
+        // console.log("生成されたmessageId: ", messageId);
+        // console.log("現在のprocessMessageIds: ", processedMessageIds);
+
+        console.log("新しい弾幕を表示: ", text);
+        createText(text);
+        processedMessageIds.add(messageId);
+        console.log("追加後のprocessedMessageIds: ", Array.from(processedMessageIds));
+
+        if (processedMessageIds.size > 100) {
+          processedMessageIds.delete(processedMessageIds.values().next().value);
+        }
+      }
+    }
+  }, 1000)
 }
 
 export default App;
