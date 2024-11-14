@@ -54,6 +54,7 @@ function App() {
           tk: registrantToken,
           zak: zakToken,
           success: (success: unknown) => {
+            console.log(success);
             const footer = document.getElementById('foot-bar');
             const fireBtn = document.createElement('button');
             fireBtn.textContent = '弾幕モード';
