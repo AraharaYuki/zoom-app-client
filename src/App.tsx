@@ -84,18 +84,18 @@ function App() {
   );
 }
 
-const createText = (text) => {
+const createText = (text: string) => {
   console.log("Display text : ", text);
-  const randomNum = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
+  const randomNum = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1) + min)
   var id = "video-share-layout"
-  var textbox_element = document.getElementsByClassName(id)[0];
+  var textbox_element = document.getElementsByClassName(id)[0] as HTMLElement;
 
   if (textbox_element) {
-    const height = textbox_element.style.height.replace("px", "")
-    var new_element = document.createElement('p')
-    new_element.textContent = text
-    new_element.className = 'mytext'
-    new_element.style.cssText = `top: ${randomNum(0, height)}px;`
+    const height = parseFloat(textbox_element.style.height.replace("px", ""));
+    var new_element = document.createElement('p');
+    new_element.textContent = text;
+    new_element.className = 'mytext';
+    new_element.style.cssText = `top: ${randomNum(0, height)}px;`;
     textbox_element.appendChild(new_element);
 
     setTimeout(() => {
